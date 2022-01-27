@@ -43,3 +43,7 @@ function show() {
 
 document.getElementById('add').addEventListener('click', add);
 show();
+
+function list() {
+    document.getElementById('todos').innerHTML = '<input type="text">'
+}
