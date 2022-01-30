@@ -30,20 +30,28 @@ function add() {
 //keeps task displayed in the screen
 function show() {
     var todos = getTodos();
-
+    var buttons = document.getElementsByClassName('remove');
     //this sets up each task as an unordered list
     var html = '<ul>';
-    for (var i = 0; todos.length; i++){
-        html += '<li>' = todos[i] + '<button class="remove" id="' + i + 
-            '">x</button></li>';
-    }
+    for (var i = 0; i < todos.length; i++){
+        html += '<li>' + todos[i] + '<button class="remove" id="' + i + 
+            '" onclick="remove(' + i + ')">x</button></li>';
+    };
+
+    for (var i = 0; i < buttons.length; i++){
+        buttons[i].addEventListener('click', remove);
+    };
+
     html += '</ul>';
     document.getElementById('todos').innerHTML = html;
 }
 
-document.getElementById('add').addEventListener('click', add);
-show();
+function remove(pos) {
+    var item = pos
+    var todos = getTodos();
+    todos.splice(item, 1);
+    localStorage.setItem('todo', JSON.stringify(todos));
+    show();
 
-function list() {
-    document.getElementById('todos').innerHTML = '<input type="text">'
+    return false
 }
